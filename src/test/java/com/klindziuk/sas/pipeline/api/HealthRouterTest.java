@@ -33,7 +33,6 @@ public class HealthRouterTest {
         webTestClient
                 .get().uri("/health")
                 .exchange()
-
                 .expectStatus()
                 .isOk()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON)
