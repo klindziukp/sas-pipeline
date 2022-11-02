@@ -1,4 +1,4 @@
-name: PR Pipeline
+name: Unit test CI
 
 on:
   push:
