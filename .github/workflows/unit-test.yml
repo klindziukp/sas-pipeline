@@ -26,4 +26,4 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: /home/runner/work/habit-tracker-back-end-service/habit-tracker-back-end-service/build/test-results/**/*.xml
+          files: /home/runner/work/sas-pipeline/pipeline/build/test-results/**/*.xml
