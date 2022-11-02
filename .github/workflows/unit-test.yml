@@ -21,7 +21,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Run unit tests and build with Gradle
-        run: ./gradlew clean build -i
+        run: ./gradlew clean build jacocoTestReport -i
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
