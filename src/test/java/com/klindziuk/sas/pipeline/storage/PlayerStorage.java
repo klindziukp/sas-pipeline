@@ -6,6 +6,8 @@ import java.util.Random;
 
 public final class PlayerStorage {
 
+  private static final Random RANDOM = new Random();
+
   public static final Player[] PLAYERS = new Player[]
       {
           new Player().setId(1L).setName("Son Heung-Min").setAge(29)
@@ -24,7 +26,7 @@ public final class PlayerStorage {
       };
 
   public static Player getRandomPlayer() {
-    return PLAYERS[new Random().nextInt(PLAYERS.length)];
+    return PLAYERS[RANDOM.nextInt(PLAYERS.length)];
   }
 
   public static Player[] getPlayersByClub(String club) {
