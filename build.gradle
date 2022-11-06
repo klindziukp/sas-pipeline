@@ -35,6 +35,8 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.0")
 	testImplementation("org.junit.platform:junit-platform-suite:1.9.0")
 
+	implementation 'dev.miku:r2dbc-mysql:0.8.2.RELEASE'
+
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'io.r2dbc:r2dbc-h2'
