@@ -69,3 +69,11 @@ sonarqube {
 		property "sonar.exclusions", "**/apiclient/**,**/config/**,**/constant/**,**/exception/**,**/model/**,**/PipelineApplication.java"
 	}
 }
+
+jar {
+	manifest {
+		attributes(
+				'Main-Class': 'com.klindziuk.sas.pipeline.PipelineApplication'
+		)
+	}
+}
