@@ -47,6 +47,7 @@ jacocoTestReport {
 
 sonarqube {
 	properties {
+		property "sonar.coverage.jacoco.xmlReportPaths", "/build/reports/jacoco/test/jacocoTestReport.xml"
 		property "sonar.organization", "klindziukp-github"
 		property "sonar.projectKey", "klindziukp_sas-pipeline"
 		property "sonar.exclusions", "**/apiclient/**,**/config/**,**/constant/**,**/exception/**,**/model/**,**/PipelineApplication.java"
