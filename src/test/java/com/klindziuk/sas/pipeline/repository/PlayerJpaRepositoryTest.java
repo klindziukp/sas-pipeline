@@ -4,6 +4,7 @@ import com.klindziuk.sas.pipeline.model.Player;
 import com.klindziuk.sas.pipeline.storage.PlayerStorage;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 public class PlayerJpaRepositoryTest extends BaseJpaRepositoryTest {
@@ -14,6 +15,16 @@ public class PlayerJpaRepositoryTest extends BaseJpaRepositoryTest {
 
     StepVerifier.create(findAllPlayers)
         .expectNext(PlayerStorage.PLAYERS)
+        .verifyComplete();
+  }
+
+  @Test
+  public void testFindById() {
+    final Player randomPlayer = PlayerStorage.getRandomPlayer();
+    Mono<Player> findByIdPlayer = playerRepository.findById(randomPlayer.getId());
+
+    StepVerifier.create(findByIdPlayer)
+        .expectNext(randomPlayer)
         .verifyComplete();
   }
 
