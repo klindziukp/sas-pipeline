@@ -3,11 +3,19 @@ package com.klindziuk.sas.pipeline.repository;
 import com.klindziuk.sas.pipeline.model.Player;
 import com.klindziuk.sas.pipeline.storage.PlayerStorage;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-public class PlayerJpaRepositoryTest extends BaseJpaRepositoryTest {
+@DataR2dbcTest
+@ExtendWith(SpringExtension.class)
+public class PlayerRepositoryTest {
+  @Autowired
+  PlayerRepository playerRepository;
 
   @Test
   public void testFindAll() {

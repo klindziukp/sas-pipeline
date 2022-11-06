@@ -6,7 +6,11 @@ import java.util.Random;
 
 public final class PlayerStorage {
 
+  private PlayerStorage() {
+  }
+
   private static final Random RANDOM = new Random();
+  private static final String ENGLAND = "England";
 
   public static final Player[] PLAYERS = new Player[]
       {
@@ -17,12 +21,11 @@ public final class PlayerStorage {
           new Player().setId(3L).setName("Teemu Pukki").setAge(31)
               .setClub("Norwich City").setNationality("Finland"),
           new Player().setId(4L).setName("Ivan Toney").setAge(25)
-              .setClub("Brentford").setNationality("England"),
+              .setClub("Brentford").setNationality(ENGLAND),
           new Player().setId(5L).setName("Harry Kane").setAge(32)
-              .setClub("Tottenham Hotspur").setNationality("England"),
+              .setClub("Tottenham Hotspur").setNationality(ENGLAND),
           new Player().setId(6L).setName("Mason Mount").setAge(22)
-              .setClub("Chelsea").setNationality("England")
-
+              .setClub("Chelsea").setNationality(ENGLAND)
       };
 
   public static Player getRandomPlayer() {
