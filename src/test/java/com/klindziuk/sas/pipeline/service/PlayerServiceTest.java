@@ -1,5 +1,6 @@
 package com.klindziuk.sas.pipeline.service;
 
+import com.klindziuk.sas.pipeline.exception.EntityMappingException;
 import com.klindziuk.sas.pipeline.model.Player;
 import com.klindziuk.sas.pipeline.repository.PlayerRepository;
 import com.klindziuk.sas.pipeline.storage.PlayerStorage;
@@ -41,7 +42,7 @@ public class PlayerServiceTest {
   }
 
   @Test
-  public void getPlayerByIdRouterTest() {
+  public void getPlayerByIdServiceTest() {
     final Player randomPlayer = PlayerStorage.getRandomPlayer();
     Mockito.when(playerRepository.findById(randomPlayer.getId()))
         .thenReturn(Mono.just(randomPlayer));
@@ -51,5 +52,33 @@ public class PlayerServiceTest {
     StepVerifier.create(findByIdPlayer)
         .expectNext(randomPlayer)
         .verifyComplete();
+  }
+
+  @Test
+  public void addPlayerServiceTest() {
+    Player playerToCreate = new Player().setName("test-player").setAge(43).setClub("test-club")
+        .setNationality("test-nationality");
+    Mockito.when(playerRepository.save(playerToCreate))
+        .thenReturn(Mono.just(playerToCreate.setId(77L)));
+
+    Mono<Player> savedPlayer = playerRepository.save(playerToCreate);
+
+    StepVerifier.create(savedPlayer)
+        .expectNext(playerToCreate)
+        .verifyComplete();
+  }
+
+  @Test
+  public void notFoundPlayerServiceTest() {
+    final long notFoundId = 77L;
+    final String errorMessage = "There is no player with id: '77'";
+    Mockito.when(playerRepository.findById(notFoundId))
+        .thenReturn(Mono.error(new EntityMappingException(errorMessage)));
+
+    StepVerifier
+        .create(playerRepository.findById(notFoundId))
+        .expectErrorMatches(throwable -> throwable instanceof EntityMappingException &&
+            throwable.getMessage().equals(errorMessage))
+        .verify();
   }
 }
