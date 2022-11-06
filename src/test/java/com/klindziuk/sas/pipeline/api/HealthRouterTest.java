@@ -19,25 +19,27 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @WebFluxTest
 public class HealthRouterTest {
 
-    @Autowired private ApplicationContext context;
+  @Autowired
+  private ApplicationContext context;
 
-    @Autowired private WebTestClient webTestClient;
+  @Autowired
+  private WebTestClient webTestClient;
 
-    @BeforeEach
-    public void setUp() {
-        webTestClient = WebTestClient.bindToApplicationContext(context).build();
-    }
+  @BeforeEach
+  public void setUp() {
+    webTestClient = WebTestClient.bindToApplicationContext(context).build();
+  }
 
-    @Test
-    public void healthRouterTest() {
-        webTestClient
-                .get().uri("/health")
-                .exchange()
-                .expectStatus()
-                .isOk()
-                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody(Health.class)
-                .isEqualTo(new Health("Healthy!"));
+  @Test
+  public void healthRouterTest() {
+    webTestClient
+        .get().uri("/health")
+        .exchange()
+        .expectStatus()
+        .isOk()
+        .expectHeader().contentType(MediaType.APPLICATION_JSON)
+        .expectBody(Health.class)
+        .isEqualTo(new Health("Healthy!"));
 
-    }
+  }
 }
