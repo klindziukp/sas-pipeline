@@ -8,7 +8,7 @@ plugins {
 
 group = 'com.klindziuk.sas'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 configurations {
 	compileOnly {
@@ -70,10 +70,7 @@ sonarqube {
 	}
 }
 
-//jar {
-//	manifest {
-//		attributes(
-//				'Main-Class': 'com.klindziuk.sas.pipeline.PipelineApplication'
-//		)
-//	}
-//}
+// Build executable jar
+tasks.jar {
+	enabled = false
+}
