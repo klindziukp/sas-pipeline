@@ -43,3 +43,10 @@ jacocoTestReport {
 		html.enabled true
 	}
 }
+
+sonarqube {
+	properties {
+		property "sonar.projectKey", "klindziukp_sas-pipeline"
+		property "sonar.exclusions", "**/apiclient/**,**/config/**,**/constant/**,**/exception/**,**/model/**,**/util/**,**/ApiClientServiceImpl.java,**/EvbxProductApplication.java"
+	}
+}
