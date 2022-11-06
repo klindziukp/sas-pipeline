@@ -5,9 +5,9 @@ spring:
         enabled: true
   r2dbc:
     driver: h2
-    url: r2dbc:h2:mem:///player?options=DB_CLOSE_DELAY=-1
-    username:
-    password:
+    url: ${CLEARDB_DATABASE_URL:r2dbc:h2:mem:///player?options=DB_CLOSE_DELAY=-1}
+    username: ${HEROKU_DB_PASSWORD}
+    password: ${HEROKU_DB_USER}
     pool:
       enabled: false
       initial-size: 5
