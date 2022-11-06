@@ -41,4 +41,4 @@ jobs:
         with:
           host: ${{ secrets.SONARQUBE_HOST }}
           login: ${{ secrets.SONARQUBE_TOKEN }}
-          projectKey: "sas-pipeline"
+          projectKey: "klindziukp_sas-pipeline"
