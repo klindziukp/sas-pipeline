@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java'
 	id 'jacoco'
+	id 'org.sonarqube' version "2.8"
 }
 
 group = 'com.klindziuk.sas'
@@ -47,6 +48,6 @@ jacocoTestReport {
 sonarqube {
 	properties {
 		property "sonar.projectKey", "klindziukp_sas-pipeline"
-		property "sonar.exclusions", "**/apiclient/**,**/config/**,**/constant/**,**/exception/**,**/model/**,**/util/**,**/ApiClientServiceImpl.java,**/EvbxProductApplication.java"
+		property "sonar.exclusions", "**/apiclient/**,**/config/**,**/constant/**,**/exception/**,**/model/**,**/util/**,**/PipelineApplication.java"
 	}
 }
