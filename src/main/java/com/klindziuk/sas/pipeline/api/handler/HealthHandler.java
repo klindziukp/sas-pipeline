@@ -24,7 +24,7 @@ public class HealthHandler {
 
   @NonNull
   @SuppressWarnings("deprecation")
-  public Mono<ServerResponse> healthTime(ServerRequest request) {
+  public Mono<ServerResponse> doNothing(ServerRequest request) {
     return
         ServerResponse.ok().contentType(MediaType.APPLICATION_STREAM_JSON)
             .body(doNothingFlux(), DoNothing.class);
