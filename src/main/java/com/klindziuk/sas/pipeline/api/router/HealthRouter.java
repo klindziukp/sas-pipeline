@@ -21,12 +21,11 @@ public class HealthRouter {
     }
 
     @Bean
-    @HealthApiInfo
     public RouterFunction<ServerResponse> helloRouterFunction(HealthHandler healthHandler) {
         RequestPredicate healthRoute =
             RequestPredicates.GET("/")
                 .and(RequestPredicates.accept(MediaType.APPLICATION_JSON));
 
-        return RouterFunctions.route(healthRoute, healthHandler::health);
+        return RouterFunctions.route(healthRoute, healthHandler::healthTime);
     }
 }
