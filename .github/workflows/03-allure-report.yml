@@ -1,4 +1,4 @@
-name: Integration Test
+name: Allure report
 
 on:
   workflow_run:
