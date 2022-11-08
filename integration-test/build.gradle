@@ -37,6 +37,10 @@ test {
     enabled = false
 }
 
+sonarqube {
+    skipProject = true
+}
+
 task integrationTest(type: Test) {
     useJUnitPlatform {
         includeTags "Smoke"
