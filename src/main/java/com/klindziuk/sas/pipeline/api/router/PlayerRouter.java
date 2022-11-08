@@ -19,9 +19,9 @@ public class PlayerRouter {
 
   @Bean
   @GetAllPlayersApiInfo
-  public RouterFunction<ServerResponse> getAllPlayersRouterFunction(PlayerHandler playerHandler){
+  public RouterFunction<ServerResponse> getAllPlayersRouterFunction(PlayerHandler playerHandler) {
     RequestPredicate getPlayersRoute =
-        RequestPredicates.GET("/players")
+        RequestPredicates.GET("api/v1/players")
             .and(RequestPredicates.accept(MediaType.APPLICATION_JSON));
 
     return RouterFunctions.route(getPlayersRoute, playerHandler::getAllPlayers);
@@ -29,9 +29,9 @@ public class PlayerRouter {
 
   @Bean
   @GetPlayerByIdApiInfo
-  public RouterFunction<ServerResponse> getPlayerByIdRouterFunction(PlayerHandler playerHandler){
+  public RouterFunction<ServerResponse> getPlayerByIdRouterFunction(PlayerHandler playerHandler) {
     RequestPredicate getPlayersRoute =
-        RequestPredicates.GET("/players/{id}")
+        RequestPredicates.GET("api/v1/players/{id}")
             .and(RequestPredicates.accept(MediaType.APPLICATION_JSON));
 
     return RouterFunctions.route(getPlayersRoute, playerHandler::getPlayerById);
@@ -39,9 +39,9 @@ public class PlayerRouter {
 
   @Bean
   @AddPlayerApiInfo
-  public RouterFunction<ServerResponse> addPlayerRouterFunction(PlayerHandler playerHandler){
+  public RouterFunction<ServerResponse> addPlayerRouterFunction(PlayerHandler playerHandler) {
     RequestPredicate getPlayersRoute =
-        RequestPredicates.POST("/players")
+        RequestPredicates.POST("api/v1/players")
             .and(RequestPredicates.accept(MediaType.APPLICATION_JSON));
 
     return RouterFunctions.route(getPlayersRoute, playerHandler::savePlayer);
@@ -49,9 +49,9 @@ public class PlayerRouter {
 
   @Bean
   @DeletePlayerByIdApiInfo
-  public RouterFunction<ServerResponse> deletePlayerRouterFunction(PlayerHandler playerHandler){
+  public RouterFunction<ServerResponse> deletePlayerRouterFunction(PlayerHandler playerHandler) {
     RequestPredicate getPlayersRoute =
-        RequestPredicates.DELETE("/players/{id}")
+        RequestPredicates.DELETE("api/v1/players/{id}")
             .and(RequestPredicates.accept(MediaType.APPLICATION_JSON));
 
     return RouterFunctions.route(getPlayersRoute, playerHandler::deletePlayerById);

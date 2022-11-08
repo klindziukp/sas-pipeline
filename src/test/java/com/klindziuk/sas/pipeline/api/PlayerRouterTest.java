@@ -47,14 +47,13 @@ public class PlayerRouterTest {
     Mockito.when(playerService.getAllPlayers()).thenReturn(Flux.just(PlayerStorage.PLAYERS));
 
     webTestClient
-        .get().uri("/players")
+        .get().uri("/api/v1/players")
         .exchange()
         .expectStatus()
         .isOk()
         .expectHeader().contentType(MediaType.APPLICATION_JSON)
         .expectBodyList(Player.class)
         .isEqualTo(List.of(PlayerStorage.PLAYERS));
-
   }
 
   @Test
@@ -63,7 +62,7 @@ public class PlayerRouterTest {
     Mockito.when(playerService.getPlayerById(randomPlayer.getId()))
         .thenReturn(Mono.just(randomPlayer));
 
-    final String playerByIdPath = "/players/" + randomPlayer.getId();
+    final String playerByIdPath = "/api/v1/players/" + randomPlayer.getId();
     webTestClient
         .get().uri(playerByIdPath)
         .exchange()
@@ -72,7 +71,6 @@ public class PlayerRouterTest {
         .expectHeader().contentType(MediaType.APPLICATION_JSON)
         .expectBody(Player.class)
         .isEqualTo(randomPlayer);
-
   }
 
   @Test
@@ -83,7 +81,7 @@ public class PlayerRouterTest {
         .thenReturn(Mono.just(playerToCreate.setId(77L)));
 
     webTestClient
-        .post().uri("/players")
+        .post().uri("/api/v1/players")
         .body(Mono.just(playerToCreate), Player.class)
         .exchange()
         .expectStatus()
@@ -99,7 +97,7 @@ public class PlayerRouterTest {
     Mockito.when(playerService.deletePlayerById(randomPlayer.getId()))
         .thenReturn(Mono.just(randomPlayer));
 
-    final String playerByIdPath = "/players/" + randomPlayer.getId();
+    final String playerByIdPath = "/api/v1/players/" + randomPlayer.getId();
     webTestClient
         .delete().uri(playerByIdPath)
         .exchange()
