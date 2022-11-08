@@ -20,6 +20,6 @@ public class PlayerService {
         .decoder(new JacksonDecoder())
         .logger(new Slf4jLogger(Player.class))
         .logLevel(Logger.Level.FULL)
-        .target(PlayerClient.class, "http://localhost:8080");
+        .target(PlayerClient.class, "https://epl-players.herokuapp.com/");
   }
 }
