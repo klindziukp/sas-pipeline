@@ -1,2 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Tue Nov 08 18:19:20 GMT 2022","Tue Nov 08 18:19:22 GMT 2022","1893","","com.klindziuk.sas.pipeline.test.PlayerControllerTest","","com.klindziuk.sas.pipeline.test.PlayerControllerTest","testGetAllPlayers","testGetAllPlayers()",""
