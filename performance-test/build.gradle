@@ -1,0 +1,11 @@
+plugins {
+    id 'scala'
+    id 'io.gatling.gradle' version '3.8.4'
+}
+
+group 'com.klindziuk.sas'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}

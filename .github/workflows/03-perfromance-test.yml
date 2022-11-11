@@ -1,0 +1,31 @@
+name: Performance Test
+
+on:
+  workflow_run:
+    workflows: ["Integration Test"]
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Set up JDK 17
+          uses: actions/setup-java@v2
+          with:
+            java-version: '17'
+            distribution: 'temurin'
+        - name: Run Performance tests
+          run: ./gradlew clean gatlingRun-pipeline.PlayerSimulation -i
+        - name: Annotate test results
+          uses: steviemul/gatling-annotations@v1.0
+          with:
+            name: Integration Test Results
+            report-path: ${{ github.workspace }}/performance-test/build/reports/gatling/playersimulation--*/js
+            access-token: ${{ secrets.GITHUB_TOKEN }}
