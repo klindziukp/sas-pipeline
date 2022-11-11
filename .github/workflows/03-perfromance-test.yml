@@ -26,5 +26,5 @@ jobs:
         uses: steviemul/gatling-annotations@v1.0
         with:
           name: Integration Test Results
-          report-path: ${{ github.workspace }}/performance-test/build/reports/gatling/playersimulation--*/js
+          report-path: ${{ github.workspace }}/performance-test/build/reports/gatling/playersimulation-*/js
           access-token: ${{ secrets.GITHUB_TOKEN }}
