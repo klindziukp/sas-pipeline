@@ -1,4 +1,4 @@
-name: 01 - Deploy CI and Integration Test
+name: 02 - Deploy CI and Integration Test
 
 on:
   workflow_run:
