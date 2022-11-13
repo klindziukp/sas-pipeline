@@ -34,11 +34,6 @@ jobs:
           distribution: 'temurin'
       - name: Run smoke tests
         run: ./gradlew smokeTest -i
-      - name: Publish Smoke Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          junit_files: ${{ github.workspace }}/integration-test/build/test-results/**/*.xml
   performance-test:
     if: ${{ success() }}
     needs: smoke-test
@@ -57,6 +52,6 @@ jobs:
       - name: Annotate test results
         uses: steviemul/gatling-annotations@v1.0
         with:
-          name: Integration Test Results
+          name: Performance Test Results
           report-path: ${{ github.workspace }}/performance-test/build/reports/gatling/playersimulation-*/js
           access-token: ${{ secrets.GITHUB_TOKEN }}
