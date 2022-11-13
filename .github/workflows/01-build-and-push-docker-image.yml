@@ -1,4 +1,4 @@
-name: 02 - Build and Push Docker Image
+name: 01 - Build and Push Docker Image
 
 on:
   workflow_run:
@@ -9,7 +9,6 @@ on:
       - main
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +23,7 @@ jobs:
       - name: Build jar
         run: ./gradlew clean build -x test
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag epampavelklindziuk/sas-pipeline:0.0.1-SNAPSHOT
+        run: docker build . --file Dockerfile --tag epampavelklindziuk/sas-pipeline:$(date +%s)
       - uses: actions/checkout@v2
       - name: docker login
         env:
@@ -34,4 +33,4 @@ jobs:
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
 
       - name: Docker Push
-        run: docker push 'epampavelklindziuk/sas-pipeline:0.0.1-SNAPSHOT'
+        run: docker push 'epampavelklindziuk/sas-pipeline'

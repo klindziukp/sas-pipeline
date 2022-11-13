@@ -21,24 +21,24 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Run unit tests and build with Gradle
-        run: ./gradlew clean build jacocoTestReport -i
+        run: ./gradlew clean test jacocoTestReport -i
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
           files: /home/runner/work/sas-pipeline/sas-pipeline/build/test-results/**/*.xml
-#      - name: Add coverage to PR
-#        id: jacoco
-#        uses: madrapps/jacoco-report@v1.3
-#        with:
-#          paths: ${{ github.workspace }}/build/reports/jacoco/test/jacocoTestReport.xml
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          min-coverage-overall: 65
-#          min-coverage-changed-files: 65
-#          update-comment: true
-#      - name: SonarQube Scan
-#        uses: kitabisa/sonarqube-action@v1.2.0
-#        with:
-#          host: ${{ secrets.SONARQUBE_HOST }}
-#          login: ${{ secrets.SONARQUBE_TOKEN }}
-#          projectKey: "klindziukp_sas-pipeline"
+      - name: Add coverage to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.3
+        with:
+          paths: ${{ github.workspace }}/build/reports/jacoco/test/jacocoTestReport.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 65
+          min-coverage-changed-files: 65
+          update-comment: true
+      - name: SonarQube Scan
+        uses: kitabisa/sonarqube-action@v1.2.0
+        with:
+          host: ${{ secrets.SONARQUBE_HOST }}
+          login: ${{ secrets.SONARQUBE_TOKEN }}
+          projectKey: "klindziukp_sas-pipeline"
