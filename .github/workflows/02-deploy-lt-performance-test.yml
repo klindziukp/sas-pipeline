@@ -2,7 +2,7 @@ name: 02 - Deploy LT and Performance Test
 
 on:
   workflow_run:
-    workflows: ["01 - Deploy and Integration Test"]
+    workflows: ["01 - Deploy CI and Integration Test"]
     types:
       - completed
     branches:
@@ -35,10 +35,10 @@ jobs:
       - name: Run smoke tests
         run: ./gradlew smokeTest -i
       - name: Publish Smoke Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          files: ${{ github.workspace }}/integration-test/build/test-results/**/*.xml
+          junit_files: ${{ github.workspace }}/integration-test/build/test-results/**/*.xml
   performance-test:
     if: ${{ success() }}
     needs: smoke-test
@@ -54,9 +54,9 @@ jobs:
           distribution: 'temurin'
       - name: Run Performance tests
         run: ./gradlew clean gatlingRun-pipeline.PlayerSimulation -i
-#      - name: Annotate test results
-#        uses: steviemul/gatling-annotations@v1.0
-#        with:
-#          name: Integration Test Results
-#          report-path: ${{ github.workspace }}/performance-test/build/reports/gatling/playersimulation-*/js
-#          access-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Annotate test results
+        uses: steviemul/gatling-annotations@v1.0
+        with:
+          name: Integration Test Results
+          report-path: ${{ github.workspace }}/performance-test/build/reports/gatling/playersimulation-*/js
+          access-token: ${{ secrets.GITHUB_TOKEN }}
