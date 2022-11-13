@@ -37,6 +37,8 @@ jobs:
           min-coverage-changed-files: 65
           update-comment: true
   sonarqube:
+    if: ${{ success() }}
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
       - name: SonarQube Scan

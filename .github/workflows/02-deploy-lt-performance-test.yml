@@ -1,15 +1,27 @@
-name: 04 - Performance Test
+name: 02 - Deploy LT and Performance Test
 
 on:
   workflow_run:
-    workflows: ["03 - Deploy to Heroku LT"]
+    workflows: ["01 - Deploy and Integration Test"]
     types:
       - completed
     branches:
       - main
 
 jobs:
+  deploy-to-heroku-lt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_app_name: "epl-players-lt"
+          healthcheck: "https://epl-players-lt.herokuapp.com/health"
   performance-test:
+    if: ${{ success() }}
+    needs: deploy-to-heroku-lt
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,4 +40,3 @@ jobs:
           name: Integration Test Results
           report-path: ${{ github.workspace }}/performance-test/build/reports/gatling/playersimulation-*/js
           access-token: ${{ secrets.GITHUB_TOKEN }}
-

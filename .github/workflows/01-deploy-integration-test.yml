@@ -1,15 +1,27 @@
-name: 02 - Integration Test
+name: 01 - Deploy and Integration Test
 
 on:
   workflow_run:
-    workflows: ["01 - Deploy to Heroku"]
+    workflows: ["00 - PR check"]
     types:
       - completed
     branches:
       - main
 
 jobs:
+  deploy-to-heroku:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_app_name: "epl-players"
+          healthcheck: "https://epl-players.herokuapp.com/health"
   integration-test:
+    if: ${{ success() }}
+    needs: deploy-to-heroku
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
