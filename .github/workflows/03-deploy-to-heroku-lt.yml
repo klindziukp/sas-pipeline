@@ -1,8 +1,8 @@
-name: Deploy to Heroku LT
+name: 03 - Deploy to Heroku LT
 
 on:
   workflow_run:
-    workflows: ["Integration Test"]
+    workflows: ["02 - Integration Test"]
     types:
       - completed
     branches:

@@ -1,15 +1,15 @@
-name: Deploy to Heroku
+name: 01 - Deploy to Heroku
 
 on:
   workflow_run:
-    workflows: ["PR check"]
+    workflows: ["00 - PR check"]
     types:
       - completed
     branches:
       - main
 
 jobs:
-  build:
+  deploy-to-heroku:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

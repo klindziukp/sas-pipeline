@@ -1,15 +1,15 @@
-name: Integration Test
+name: 02 - Integration Test
 
 on:
   workflow_run:
-    workflows: ["Deploy to Heroku"]
+    workflows: ["01 - Deploy to Heroku"]
     types:
       - completed
     branches:
       - main
 
 jobs:
-  build:
+  integration-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

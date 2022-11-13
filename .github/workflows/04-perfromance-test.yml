@@ -1,15 +1,15 @@
-name: Performance Test
+name: 04 - Performance Test
 
 on:
   workflow_run:
-    workflows: ["Deploy to Heroku LT"]
+    workflows: ["03 - Deploy to Heroku LT"]
     types:
       - completed
     branches:
       - main
 
 jobs:
-  build:
+  performance-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,3 +28,4 @@ jobs:
           name: Integration Test Results
           report-path: ${{ github.workspace }}/performance-test/build/reports/gatling/playersimulation-*/js
           access-token: ${{ secrets.GITHUB_TOKEN }}
+

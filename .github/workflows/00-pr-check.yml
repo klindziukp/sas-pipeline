@@ -1,4 +1,4 @@
-name: PR check
+name: 00 - PR check
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -36,6 +36,9 @@ jobs:
           min-coverage-overall: 65
           min-coverage-changed-files: 65
           update-comment: true
+  sonarqube:
+    runs-on: ubuntu-latest
+    steps:
       - name: SonarQube Scan
         uses: kitabisa/sonarqube-action@v1.2.0
         with:
