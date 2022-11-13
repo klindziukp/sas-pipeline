@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag epampavelklindziuk/sas-pipeline:tagname:0.0.1-SNAPSHOT
+        run: docker build . --file Dockerfile --tag epampavelklindziuk/sas-pipeline:0.0.1-SNAPSHOT
       - uses: actions/checkout@v2
       - name: docker login
         env:
