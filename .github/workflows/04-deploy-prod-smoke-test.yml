@@ -32,5 +32,5 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Run integration tests
+      - name: Run smoke tests
         run: ./gradlew smokeTest -i
