@@ -46,6 +46,11 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+bootBuildImage {
+	builder = 'paketobuildpacks/builder:tiny'
+	imageName = "${rootProject.name}:${version}"
+}
+
 jacocoTestReport {
 	reports {
 		xml.enabled true

@@ -1,69 +1,69 @@
-name: 01 - Deploy CI and Integration Test
-
-on:
-  workflow_run:
-    workflows: ["00 - PR check"]
-    types:
-      - completed
-    branches:
-      - main
-
-jobs:
-  deploy-to-heroku-ci:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          heroku_app_name: "epl-players-ci"
-          healthcheck: "https://epl-players-ci.herokuapp.com/health"
-  integration-test:
-    if: ${{ success() }}
-    needs: deploy-to-heroku-ci
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Run integration tests
-        run: ./gradlew integrationTest -i
-
-      - name: Publish Integration Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
-        if: always()
-        with:
-          files: ${{ github.workspace }}/integration-test/build/test-results/**/*.xml
-
-      - name: Get Allure history
-        uses: actions/checkout@v2
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
-        with:
-          allure_results: ${{ github.workspace }}/integration-test/build/allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
-          keep_reports: 2
-
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
+#name: 01 - Deploy CI and Integration Test
+#
+#on:
+#  workflow_run:
+#    workflows: ["00 - PR check"]
+#    types:
+#      - completed
+#    branches:
+#      - main
+#
+#jobs:
+#  deploy-to-heroku-ci:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+#        with:
+#          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+#          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+#          heroku_app_name: "epl-players-ci"
+#          healthcheck: "https://epl-players-ci.herokuapp.com/health"
+#  integration-test:
+#    if: ${{ success() }}
+#    needs: deploy-to-heroku-ci
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin'
+#      - name: Run integration tests
+#        run: ./gradlew integrationTest -i
+#
+#      - name: Publish Integration Test Results
+#        uses: EnricoMi/publish-unit-test-result-action@v1
+#        if: always()
+#        with:
+#          files: ${{ github.workspace }}/integration-test/build/test-results/**/*.xml
+#
+#      - name: Get Allure history
+#        uses: actions/checkout@v2
+#        if: always()
+#        continue-on-error: true
+#        with:
+#          ref: gh-pages
+#          path: gh-pages
+#
+#      - name: Allure Report action from marketplace
+#        uses: simple-elf/allure-report-action@master
+#        if: always()
+#        id: allure-report
+#        with:
+#          allure_results: ${{ github.workspace }}/integration-test/build/allure-results
+#          gh_pages: gh-pages
+#          allure_report: allure-report
+#          allure_history: allure-history
+#          keep_reports: 2
+#
+#      - name: Deploy report to Github Pages
+#        if: always()
+#        uses: peaceiris/actions-gh-pages@v2
+#        env:
+#          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          PUBLISH_BRANCH: gh-pages
+#          PUBLISH_DIR: allure-history
