@@ -1,4 +1,4 @@
-name: 01 - Deploy and Integration Test
+name: 01 - Deploy CI and Integration Test
 
 on:
   workflow_run:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  deploy-to-heroku:
+  deploy-to-heroku-ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,11 +17,11 @@ jobs:
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          heroku_app_name: "epl-players"
-          healthcheck: "https://epl-players.herokuapp.com/health"
+          heroku_app_name: "epl-players-ci"
+          healthcheck: "https://epl-players-ci.herokuapp.com/health"
   integration-test:
     if: ${{ success() }}
-    needs: deploy-to-heroku
+    needs: deploy-to-heroku-ci
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

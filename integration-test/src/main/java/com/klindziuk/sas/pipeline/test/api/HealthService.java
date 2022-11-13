@@ -1,25 +1,25 @@
 package com.klindziuk.sas.pipeline.test.api;
 
-import com.klindziuk.sas.pipeline.test.response.Player;
+import com.klindziuk.sas.pipeline.test.response.HealthResponse;
 import feign.Feign;
-import feign.Logger;
+import feign.Logger.Level;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
 
-public class PlayerService {
+public class HealthService {
 
-  public PlayerService() {
+  public HealthService() {
   }
 
-  public PlayerClient playerClient() {
+  public HealthClient healthClient() {
     return Feign.builder()
         .client(new OkHttpClient())
         .encoder(new JacksonEncoder())
         .decoder(new JacksonDecoder())
-        .logger(new Slf4jLogger(Player.class))
-        .logLevel(Logger.Level.FULL)
-        .target(PlayerClient.class, "https://epl-players-ci.herokuapp.com/");
+        .logger(new Slf4jLogger(HealthResponse.class))
+        .logLevel(Level.FULL)
+        .target(HealthClient.class, "https://epl-players.herokuapp.com/");
   }
 }

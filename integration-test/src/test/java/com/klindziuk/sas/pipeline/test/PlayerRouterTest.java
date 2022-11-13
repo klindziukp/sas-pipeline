@@ -7,11 +7,11 @@ import com.klindziuk.sas.pipeline.test.response.Player;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-@Tag("Smoke")
-public class PlayerControllerTest {
+@Tag("Integration")
+public class PlayerRouterTest {
 
   @Test
-  @Tag("Smoke")
+  @Tag("Integration")
   public void testGetAllPlayers() {
     Player[] players = new PlayerService().playerClient().playersResponse();
     assertEquals(6, players.length);

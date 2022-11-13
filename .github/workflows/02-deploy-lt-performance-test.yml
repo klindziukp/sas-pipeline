@@ -19,9 +19,29 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           heroku_app_name: "epl-players-lt"
           healthcheck: "https://epl-players-lt.herokuapp.com/health"
-  performance-test:
+  smoke-test:
     if: ${{ success() }}
     needs: deploy-to-heroku-lt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Run smoke tests
+        run: ./gradlew smokeTest -i
+      - name: Publish Smoke Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: ${{ github.workspace }}/integration-test/build/test-results/**/*.xml
+  performance-test:
+    if: ${{ success() }}
+    needs: smoke-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

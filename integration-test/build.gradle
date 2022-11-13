@@ -44,5 +44,12 @@ sonarqube {
 task integrationTest(type: Test) {
     useJUnitPlatform {
         includeTags "Smoke"
+        includeTags "Integration"
+    }
+}
+
+task smokeTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "Smoke"
     }
 }
