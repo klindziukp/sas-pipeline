@@ -15,7 +15,7 @@ import static io.gatling.javaapi.http.HttpDsl.status;
 public class PlayerSimulation extends Simulation {
 
   HttpProtocolBuilder httpProtocol = HttpDsl.http
-      .baseUrl("https://epl-players.herokuapp.com/api/v1/")
+      .baseUrl("https://epl-players-lt.herokuapp.com/api/v1/")
       .acceptHeader("application/json")
       .userAgentHeader("Gatling/Performance Test");
 

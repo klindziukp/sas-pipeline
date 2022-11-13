@@ -2,7 +2,7 @@ name: Performance Test
 
 on:
   workflow_run:
-    workflows: [ "Integration Test" ]
+    workflows: ["Deploy to Heroku LT"]
     types:
       - completed
     branches:
