@@ -14,6 +14,10 @@ Reactive Back End service provides statistics about EPL football players
 - PROD: https://epl-players.herokuapp.com/
 
 ## Open API documentation
+<p align="left">
+    <img src="docs/images/open-api.png" width="1000px" alt="open-api">
+</p>
+
 - Open 'http://{server}:{port}/api-docs' to view documentation in JSON format for TDM service
 ```bash
 http://localhost:8080/v3/api-docs
@@ -37,3 +41,15 @@ https://epl-players-ci.herokuapp.com/webjars/swagger-ui/index.html
     <img src="docs/images/live-env.png" width="1000px" alt="open-api">
 </p>
 
+#### Performance test execution
+Local Run
+```bash
+./gradlew clean gatlingRun-pipeline.PlayerSimulation
+```
+LT env
+```bash
+https://github.com/klindziukp/sas-pipeline/actions/workflows/03-deploy-lt-performance-test.yml
+```
+
+#### Sonar Results
+https://sonarcloud.io/project/overview?id=klindziukp_sas-pipeline
