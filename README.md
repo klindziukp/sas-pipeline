@@ -24,7 +24,7 @@ https://epl-players-ci.herokuapp.com/v3/api-docs
 ```bash
 http://localhost:8080/swagger-ui/index.html
 or
-https://epl-players-ci.herokuapp.com/swagger-ui/index.html
+https://epl-players-ci.herokuapp.com/webjars/swagger-ui/index.html
 ```
 
 ## Quality gate flow
