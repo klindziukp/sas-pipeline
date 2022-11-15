@@ -1,4 +1,4 @@
-# Epl player service for pipeline
+# EPL players service for pipeline
 Reactive Back End service provides statistics about EPL football players 
 
 ## Tech
