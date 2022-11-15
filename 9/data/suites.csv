@@ -1,3 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Tue Nov 15 09:20:45 GMT 2022","Tue Nov 15 09:21:01 GMT 2022","15987","","com.klindziuk.sas.pipeline.test.HealthRouterTest","","com.klindziuk.sas.pipeline.test.HealthRouterTest","testHealth","testHealth()",""
-"passed","Tue Nov 15 09:21:01 GMT 2022","Tue Nov 15 09:21:03 GMT 2022","1208","","com.klindziuk.sas.pipeline.test.PlayerRouterTest","","com.klindziuk.sas.pipeline.test.PlayerRouterTest","testGetAllPlayers","testGetAllPlayers()",""
